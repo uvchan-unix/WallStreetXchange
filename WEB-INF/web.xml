@@ -23,4 +23,15 @@
         <url-pattern>/testing</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>getStocks</servlet-name>
+        <servlet-class>com.wallstreet.wallstreetxchange.controllers.stocks.GetStockInfo</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getStocks</servlet-name>
+        <url-pattern>/services/stocks/getStocks</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

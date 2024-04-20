@@ -1,21 +1,82 @@
 package com.wallstreet.wallstreetxchange.properties;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-import com.wallstreet.wallstreetxchange.models.DAO.DBOperarion;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
+import com.wallstreet.wallstreetxchange.models.DAO.DBOModule;
+import com.wallstreet.wallstreetxchange.models.congiguration.StockCollections;
 
 public class FunctionDefanitions {
-    
+
     private static ServletContext getServletContexti(HttpServletRequest request) {
         return request.getServletContext();
-    } 
+    }
 
-    public static DBOperarion getDbOperarion(HttpServletRequest request) {
+    public static DBOModule getDbOperarion(HttpServletRequest request) {
 
         ServletContext context = getServletContexti(request);
-        DBOperarion dbOperarion = (DBOperarion)context.getAttribute("db");
+        DBOModule dbOperarion = (DBOModule) context.getAttribute("db");
         return dbOperarion;
-    } 
+    }
+
+    public static StockCollections getStockCollections(HttpServletRequest request) {
+
+        ServletContext context = getServletContexti(request);
+        StockCollections stockCollections = (StockCollections) context.getAttribute("stockcollection");
+        return stockCollections;
+    }
+
+    public static void outputWriter(String output, HttpServletResponse resp) throws ServletException, IOException{
+
+        try {
+
+            PrintWriter write = resp.getWriter();
+            write.write(output);
+            write.flush();
+
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write("Error processing request");
+
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.getWriter().write("Error processing request");
+        }
+
+    }
+
+    public static JSONObject inputReader(HttpServletRequest req){
+        
+        JSONObject json = null;
+        StringBuilder payload = new StringBuilder();
+        try {
+            
+            BufferedReader reader = req.getReader();
+            String line;
+
+            while ((line = reader.readLine())!= null) {
+                payload.append(line);
+            }
+            json = new JSONObject(payload.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return json;
+
+    }
 
 }
