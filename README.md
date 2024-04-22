@@ -6,4 +6,4 @@ WallStreetXchange is an virtual StockTrading app where you can monitor your real
 - Stock Related API
 
     - /services/stocks/getStocks `[GET]`
-    
+    GCIXD5L8AAT5QMV6

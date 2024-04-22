@@ -1,7 +1,7 @@
 import requests
 
 def get_itc_price():
-    url = "https://query1.finance.yahoo.com/v8/finance/chart/ITC.NS"
+    url = "https://query1.finance.yahoo.com/v8/finance/chart/ZOMATO.NS"
     params = {
         "region": "US",
         "lang": "en-US",

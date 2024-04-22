@@ -32,6 +32,19 @@
         "/home/magesh/Documents/apache-tomcat-8.5.50/lib/catalina-ant.jar",
         "/home/magesh/Documents/apache-tomcat-8.5.50/lib/catalina.jar",
         "/home/magesh/Documents/apache-tomcat-8.5.50/lib/annotations-api.jar",
-        "/home/magesh/Documents/apache-tomcat-8.5.50/webapps/codeDojo/WEB-INF/lib/json-20231013.jar"
+        "/home/magesh/Documents/apache-tomcat-8.5.50/webapps/codeDojo/WEB-INF/lib/json-20231013.jar",
+        "/home/magesh/Downloads/jsoup-1.17.2.jar",
+        "WEB-INF/lib/servlet-api.jar",
+        "WEB-INF/lib/okio-jvm-3.9.0.jar",
+        "WEB-INF/lib/okhttp-5.0.0-alpha.14.jar",
+        "WEB-INF/lib/mysql-connector-j-8.2.0.jar",
+        "WEB-INF/lib/kotlin-stdlib-1.9.23.jar",
+        "WEB-INF/lib/jsoup-1.17.2.jar",
+        "WEB-INF/lib/json-20231013.jar",
+        "WEB-INF/lib/javax.mail.jar",
+        "WEB-INF/lib/javaparser-core-3.25.7.jar",
+        "WEB-INF/lib/gson-2.8.2.jar",
+        "WEB-INF/lib/annotations-13.0.jar",
+        "WEB-INF/lib/activation-1.1.1.jar"
     ]
 }

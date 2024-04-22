@@ -1,36 +1,34 @@
-package com.wallstreet.wallstreetxchange.controllers;
+package com.wallstreet.wallstreetxchange.controllers.stocks;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.wallstreet.wallstreetxchange.models.DAO.DBOModule;
-import com.wallstreet.wallstreetxchange.models.congiguration.StockCollections;
+
+import com.wallstreet.wallstreetxchange.models.stocks.GetStockPrice;
 import com.wallstreet.wallstreetxchange.properties.FunctionDefanitions;
 
-@WebServlet("/main")
-public class Main extends HttpServlet {
+@WebServlet("/getprice")
+public class GetCurrentPrice extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         resp.setContentType("application/json");
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "GET");
         resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-        PrintWriter out = resp.getWriter();
+        String sym = req.getParameter("s");
+        GetStockPrice p = new GetStockPrice();
+        String pe = p.getStockPrice(sym,"NSE");
 
-        DBOModule dbOperarion = FunctionDefanitions.getDbOperarion(req);
-        dbOperarion.test();
-        
-        StockCollections stockCollections = FunctionDefanitions.getStockCollections(req);
-        String stockInfo = stockCollections.getStocks("s",false).toString();
-        out.println(stockInfo);
-        
+        FunctionDefanitions.outputWriter(pe, resp);
+
         
     }
+    
 }

@@ -34,7 +34,8 @@ public class Login extends HttpServlet {
             session.setAttribute("User", verifiedUser);
 
             FunctionDefanitions.outputWriter("Success", resp);
-        } else {
+
+        }else if(code.toString() == "111") {
             FunctionDefanitions.outputWriter("tappuuu" + code.toString() , resp);
         }
 

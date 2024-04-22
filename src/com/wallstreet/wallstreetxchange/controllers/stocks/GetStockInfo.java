@@ -22,9 +22,10 @@ public class GetStockInfo extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
         String prefix = req.getParameter("prefix");
-
+        String price = req.getParameter("price");
+        boolean temp = Boolean.valueOf(price);
         StockCollections stockCollections = FunctionDefanitions.getStockCollections(req);
-        String stockInfo = stockCollections.getStocks(prefix).toString();
+        String stockInfo = stockCollections.getStocks(prefix,temp).toString();
 
         FunctionDefanitions.outputWriter(stockInfo, resp);
         // FunctionDefanitions.outputWriter(stockInfo, resp);
