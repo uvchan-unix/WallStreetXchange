@@ -1,0 +1,206 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --background-color:#f9f9f9;
+    --sidebar-color:#7A40F2;
+    --slider-position:7rem;
+    --font-family:"Poppins", sans-serif;
+
+}
+
+html{
+    height: 100%;
+    width: 100%;
+}
+
+/* Sidebar navs start here ... : ) */
+.wrapper{
+    height: 100vh;
+    width: 100%;
+    background-color: var(--background-color);
+    position: relative;
+    
+}
+
+.sidebar-wrapper.open{
+    width: 13rem;
+    overflow: visible;
+}
+
+.sidebar-wrapper{
+    height: 100vh;
+    position: absolute;
+    /* left: 0.2%; */
+    top: 50%;
+    transform: translateY(-50%);
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 5rem;
+    background-color: var(--sidebar-color);
+    overflow: hidden;
+}
+
+.sidebar-logo-container{
+    height: 6rem;
+    border: 1px solid black;
+}
+
+
+.sidebar-menu-container ul li{
+    /* border: 1px solid red; */
+    margin-top: 0.5rem;
+    /* background-color: #fefefe; */
+}
+
+.menu-slider{
+
+    height:3.2rem;
+    width: 3.2rem;
+    border: 1px solid wheat;
+    position: absolute;
+    background-color: aliceblue;
+    z-index: -1;
+    right: 50%;
+    top:var(--slider-position);
+    transform: translateX(50%);
+    border-radius: 50%;
+
+}
+
+.menu-slider.open{
+    width:12rem ;
+    border-radius: 8px;
+}
+
+.menu{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-wrap: nowrap;
+    text-decoration: none;
+}
+.menu-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    min-width: 5rem;
+    height: 4rem;
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(32, 32, 32);
+}
+
+.menu-name{
+    /* border: 1px solid black; */
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 1.3rem;
+    font-family: var(--font-family);
+    font-weight: 500;
+}
+
+/* Sidebar nav endess ...here  */
+
+/*Top nav bar starts herr ... */
+
+.main-body{
+    height: 100vh;
+    width: calc(100% - 5rem);
+    position: absolute;
+    right: 0;
+    /* background-color: black; */
+    /* background-color: #7A40F2; */
+}
+
+.top-nav-wrapper{
+    /* height: 4rem; */
+    border-bottom: 1px solid rgb(197, 196, 196);
+    display: flex;
+    position: relative;
+}
+
+.main-body-content{
+    /* border: 1px solid black; */
+    /* height:; */
+}
+
+.section-header{
+    font-size: 1.7rem;
+    font-family: var(--font-family);
+    font-weight: 500;
+    /* background-color:  rgb(15, 123, 217); */
+    padding: 0.6rem;
+    position: absolute;    
+}
+
+.top-nav-serarch-bar{
+    /* border: 1px solid rgb(89, 21, 215); */
+    height: 4rem;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    /* background-color: black; */
+}
+.search-box{
+    height: 2.5rem;
+    width: 30rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+
+.search-result-wrapper{
+    /* border: 1px solid rgb(16, 16, 15); */
+    height: 12rem;
+    width: 30rem;
+    position: absolute;
+    top: 3.3rem;
+    background-color: rgb(247, 239, 239);
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px, rgba(0, 0, 0, 0.2) 0px 5px 5px -3px;
+    overflow-y: scroll;
+}
+
+.search-result-stocks{
+    display: flex;
+    justify-content: space-between  ;
+    border-bottom: 1px solid rgb(200, 198, 198);
+    padding: 0.5rem 0px;
+}
+
+.search-result-infoone{
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    font-family: var(--font-family);
+    padding-left: 0.5rem;
+}
+
+.search-result-infotwo{
+    /* border: 1px solid black; */
+    font-family: var(--font-family);
+    padding: 0.5rem;
+    
+}
+
+.search-stock-result-symbol{
+    font-size: 0.6rem;
+}
+.search-stock-result-exchange{
+    padding: 0px 1rem;
+}
+.search-stock-result-price{
+    padding: 0px 1rem;
+    /* border: 1px solid green; */
+    background-color: #89eca5;
+    fill: #137333;
+    border-radius: 6px;
+}

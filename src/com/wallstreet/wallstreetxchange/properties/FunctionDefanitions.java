@@ -2,6 +2,7 @@ package com.wallstreet.wallstreetxchange.properties;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
@@ -78,5 +79,28 @@ public class FunctionDefanitions {
         return json;
 
     }
+
+    public static JSONObject inputReader(InputStreamReader req){
+        
+        JSONObject json = null;
+        StringBuilder payload = new StringBuilder();
+        try {
+            
+            BufferedReader reader = new BufferedReader(req);
+            String line;
+
+            while ((line = reader.readLine())!= null) {
+                payload.append(line);
+            }
+            json = new JSONObject(payload.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        return json;
+
+    }
+
 
 }

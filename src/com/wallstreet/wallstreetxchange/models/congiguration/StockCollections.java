@@ -12,7 +12,7 @@ import com.wallstreet.wallstreetxchange.models.stocks.*;
 public class StockCollections {
     
     private TrieNode rootNode;
-    GetStockPrice obj = new GetStockPrice();
+    
     // PriceExtractor obj = new PriceExtractor();
     // GetStockPrices obj = new GetStockPrices();
     
@@ -72,8 +72,12 @@ public class StockCollections {
             json.put("stockSymbol", node.stock.getStockSymbol());
             json.put("stockExchange", node.stock.getStockExchange());
             if (price) {
-                
+                GetStockPrice obj = new GetStockPrice();
                 json.put("curretPrice", obj.getStockPrice(node.stock.getStockSymbol(),"NSE"));
+            }
+            else{
+                GetStockPriceInfo obj = new GetStockPriceInfo();
+                json.put("currentPrice", obj.getStockPrice(node.stock.getStockSymbol()));
             }
             array.put(json);
         }
