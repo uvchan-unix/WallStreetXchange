@@ -6,6 +6,11 @@ public class Stock {
     private String stockSymbol;
     private String stockExchange;
     private int curretPrice;
+    private int stockID;
+    
+    public Stock(){
+
+    }
     
     public Stock(String stockName, String stockSymbol, String stockExchange) {
         this.stockName = stockName;
@@ -13,8 +18,21 @@ public class Stock {
         this.stockExchange = stockExchange;
     }
 
-    public Stock(String StockName , String stockSymbol , String stockExchange,int curretPrice ){
+    public Stock(int stockID,String stockName , String stockSymbol , String stockExchange){
 
+        this.stockID = stockID;
+        this.stockName = stockName;
+        this.stockSymbol = stockSymbol;
+        this.stockExchange = stockExchange;
+
+    }
+
+    public int getStockID() {
+        return stockID;
+    }
+
+    public void setStockID(int stockID) {
+        this.stockID = stockID;
     }
 
     public String getStockName() {

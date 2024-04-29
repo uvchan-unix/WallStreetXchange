@@ -20,6 +20,10 @@ public class StatusCode {
         return this.status;
     }
 
+    public int toInt(){
+        return Integer.parseInt(status);
+    }
+
     public StatusCode(String code ){
         this.status = code;
     }

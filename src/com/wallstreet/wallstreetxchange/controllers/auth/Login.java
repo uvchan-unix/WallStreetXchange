@@ -32,8 +32,8 @@ public class Login extends HttpServlet {
             HttpSession session = req.getSession();
             User verifiedUser = db.getUserObj(username, password);
             session.setAttribute("User", verifiedUser);
-
-            FunctionDefanitions.outputWriter("Success", resp);
+            System.out.println(verifiedUser.getUsername());
+            FunctionDefanitions.outputWriter("Success"+verifiedUser.getUserID()+"k", resp);
 
         }else if(code.toString() == "111") {
             FunctionDefanitions.outputWriter("tappuuu" + code.toString() , resp);

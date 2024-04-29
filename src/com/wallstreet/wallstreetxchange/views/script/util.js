@@ -1,44 +1,61 @@
-document.addEventListener("DOMContentLoaded", function() {
-    function doGet(url, callback) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => callback(data))
-            .catch(error => console.error('Request failed with error:', error));
-    }
+function doGet(url, callback, startAnimation, stopAnimation) {
+    startAnimation();
 
-    function display(response) {
-        let html = ""; 
-    
-        response.forEach(stock => {
-            
-            let stockHtml = template.replace("#RELIANCE POWER", stock.stockName)
-                                    .replace("#RPOWER(NSE/BSE)", stock.stockSymbol + " (" + stock.stockExchange + ")")
-                                    .replace("#$50", stock.currentPrice)
-                                    
-    
-            
-            html += stockHtml;
+    fetch(url)
+        .then(response => {
+            stopAnimation();
+            return response.json();
+        })
+        .then(data => callback(data))
+        .catch(error => {
+            console.error('Request failed with error:', error);
+            stopAnimation();
         });
-    
-        displaybox.innerHTML = html;
-    }
+}
+
+function loadDynamicPage(url, callback) {
+
+    fetch(url)
+        .then(response => {
+            return response;
+        })
+        .then(data => callback(data))
+        .catch(error => {
+            console.error('Request failed with error:', error);
+
+        });
+
+
+}
+
+function loadChart(symbol, watchlist) {
+
+    new TradingView.widget(
+        {
+            "autosize": true,
+            "symbol": symbol,
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "enable_publishing": false,
+            "withdateranges": true,
+            "hide_side_toolbar": false,
+            "allow_symbol_change": true,
+            "watchlist": ["BSE:ITC","BSE:RPOWER"],
+            "details": true,
+            "hotlist": true,
+            "calendar": false,
+            "support_host": "https://www.tradingview.com",
+            "container_id": "chart-container"
+        }
+    );
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("loaded")
     
 
-    let searchbox = document.querySelector(".search-box");
-    let displaybox = document.querySelector(".search-result-wrapper")
-    let template = `<div class="search-result-stocks">
-                        <div class="search-result-infoone">
-                            <span class="search-stock-result-name">#RELIANCE POWER</span>
-                            <span class="search-stock-result-symbol">#RPOWER(NSE/BSE)</span>
-                        </div>
-                        <div class="search-result-infotwo">
-                            <span class="search-stock-result-exchange">#$50</span>
-                            <span class="search-stock-result-price">#22%</span>
-                        </div>
-                    </div>`;
-
-    searchbox.addEventListener('input', function() {
-        displaybox.innerHTML = " ";
-        doGet("http://localhost:8080/WallStreetXchange/services/stocks/getStocks?prefix="+searchbox.value, display);
-    });
 });

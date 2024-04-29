@@ -17,24 +17,28 @@ public class GetStockPriceInfo {
 
     private JSONObject getJsonResp(String stockSymbol){
 
-        JSONObject json = null;
+        JSONObject json = null; 
         try {
-            URL url = new URL(apiUrl+stockSymbol+".NS");
+            URL url = new URL(apiUrl + stockSymbol + ".NS");
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("GET");
             int code = con.getResponseCode();
-
-            if (code==200) {
+            System.out.println(code);
+            if (code == 200) {
                json = FunctionDefanitions.inputReader(new InputStreamReader(con.getInputStream()));
+            }
+            else{
+                json.put("error", "while ferching api"+String.valueOf(code));
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e);
         }
         return json;
     }
     
     public double getStockPrice(String stockSymbol){
-        JSONObject json = getJsonResp(stockSymbol); 
+      JSONObject json = getJsonResp(stockSymbol); 
         if (json!=null) {
             try {
                 JSONObject jsonobj = json.getJSONObject("chart").getJSONArray("result").getJSONObject(0).getJSONObject("meta");

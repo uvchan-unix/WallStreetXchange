@@ -24,11 +24,14 @@ public class GetStockInfo extends HttpServlet {
         String prefix = req.getParameter("prefix");
         String price = req.getParameter("price");
         boolean temp = Boolean.valueOf(price);
-        StockCollections stockCollections = FunctionDefanitions.getStockCollections(req);
-        String stockInfo = stockCollections.getStocks(prefix,temp).toString();
-
-        FunctionDefanitions.outputWriter(stockInfo, resp);
+        if (prefix.length() == 0 || prefix == null) {
+            FunctionDefanitions.outputWriter("no input", resp);
+        } else {
+            StockCollections stockCollections = FunctionDefanitions.getStockCollections(req);
+            String stockInfo = stockCollections.getStocks(prefix, temp).toString();
+            FunctionDefanitions.outputWriter(stockInfo, resp);
+        }
         // FunctionDefanitions.outputWriter(stockInfo, resp);
 
-    }      
+    }
 }

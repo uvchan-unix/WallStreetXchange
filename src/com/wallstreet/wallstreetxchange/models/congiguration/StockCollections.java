@@ -71,6 +71,7 @@ public class StockCollections {
             json.put("stockName", node.stock.getStockName());
             json.put("stockSymbol", node.stock.getStockSymbol());
             json.put("stockExchange", node.stock.getStockExchange());
+            
             if (price) {
                 GetStockPrice obj = new GetStockPrice();
                 json.put("curretPrice", obj.getStockPrice(node.stock.getStockSymbol(),"NSE"));
@@ -99,10 +100,10 @@ public class StockCollections {
         }
         return null;
     }
-
+    
     public void dataInsertion(){
 
-        insert("Tata Motors", "TATAMOTORS", "BSE/NSE");
+        insert("Tata Motors", "RPOWER", "BSE/NSE");
         insert("ITC Limited", "ITC", "BSE/NSE");
         insert("Sun Pharmaceutical Industries", "SUNPHARMA", "BSE/NSE");
         insert("Mahindra & Mahindra", "M&M", "BSE/NSE");

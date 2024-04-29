@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.wallstreet.wallstreetxchange.models.DAO.DBOModule;
+import com.wallstreet.wallstreetxchange.models.DAO.User;
 import com.wallstreet.wallstreetxchange.models.congiguration.StockCollections;
 
 public class FunctionDefanitions {
@@ -34,6 +35,13 @@ public class FunctionDefanitions {
         StockCollections stockCollections = (StockCollections) context.getAttribute("stockcollection");
         return stockCollections;
     }
+
+    public static User getuserObj(HttpServletRequest request){
+        
+        User user = (User) request.getSession().getAttribute("User");
+        return user;
+    }
+        
 
     public static void outputWriter(String output, HttpServletResponse resp) throws ServletException, IOException{
 
