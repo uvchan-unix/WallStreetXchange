@@ -1,5 +1,7 @@
 {
     "recommendations": [
-        "jakebathman.mysql-syntax"
+        "jakebathman.mysql-syntax",
+        "ritwickdey.liveserver",
+        "ms-vscode.live-server"
     ]
 }

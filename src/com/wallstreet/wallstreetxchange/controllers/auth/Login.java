@@ -35,6 +35,8 @@ public class Login extends HttpServlet {
             System.out.println(verifiedUser.getUsername());
             FunctionDefanitions.outputWriter("Success"+verifiedUser.getUserID()+"k", resp);
 
+            resp.sendRedirect("/src/com/wallstreet/wallstreetxchange/views/html/index.html");
+
         }else if(code.toString() == "111") {
             FunctionDefanitions.outputWriter("tappuuu" + code.toString() , resp);
         }

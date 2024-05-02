@@ -23,12 +23,13 @@ public class BuySellOperation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        resp.setContentType("application/json");
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "POST");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        
         try {
 
-            resp.setContentType("application/json");
-            resp.setHeader("Access-Control-Allow-Origin", "*");
-            resp.setHeader("Access-Control-Allow-Methods", "GET");
-            resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
             JSONObject json = FunctionDefanitions.inputReader(req);
             System.out.println(json.toString());
@@ -56,7 +57,7 @@ public class BuySellOperation extends HttpServlet {
             System.out.println(stockPrice);
 
             double availableFunds = (db.getUserWalletMETA(user)).getDouble("availableFunds:");
-            double totalFundsNeeded = availableFunds * quantity;
+            double totalFundsNeeded = stockPrice * quantity;
 
             System.out.println(availableFunds);
 
@@ -68,9 +69,9 @@ public class BuySellOperation extends HttpServlet {
                     FunctionDefanitions.outputWriter(String.valueOf(code), resp);
         
                 } else if (code == 1112) {
-                    FunctionDefanitions.outputWriter(symbol, resp);
+                    FunctionDefanitions.outputWriter("{ resp :"+symbol+"}", resp);
                 } else if (code == 1113) {
-                    FunctionDefanitions.outputWriter(symbol, resp);
+                    FunctionDefanitions.outputWriter("{  resp :"+symbol+"}", resp);
                 }
             }
 

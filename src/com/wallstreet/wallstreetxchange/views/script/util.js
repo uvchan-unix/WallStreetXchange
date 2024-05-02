@@ -13,6 +13,35 @@ function doGet(url, callback, startAnimation, stopAnimation) {
         });
 }
 
+function doPost(url,data,callback,startAnimation,stopAnimation) {
+    startAnimation()
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        mode: 'no-cors'
+    };
+    
+    fetch(url, options)
+        .then(response => {
+            if (response.ok) {
+                return response.json(); 
+            } 
+        })
+        .then(data => {
+            stopAnimation()
+            console.log('Response data:', data);
+            callback(data)
+        })
+        .catch(error => {
+            stopAnimation()
+            console.error('There was a problem with the fetch operation:', error);
+        });
+
+}
+
 function loadDynamicPage(url, callback) {
 
     fetch(url)
@@ -43,7 +72,7 @@ function loadChart(symbol, watchlist) {
             "withdateranges": true,
             "hide_side_toolbar": false,
             "allow_symbol_change": true,
-            "watchlist": ["BSE:ITC","BSE:RPOWER"],
+            "watchlist": ["BSE:ITC", "BSE:RPOWER"],
             "details": true,
             "hotlist": true,
             "calendar": false,
@@ -51,11 +80,23 @@ function loadChart(symbol, watchlist) {
             "container_id": "chart-container"
         }
     );
+
+    
+}
+
+function showPopup(content,color) {
+    let popup = document.getElementById('info-popup');
+    popup.textContent = content;
+    popup.style.display = 'block';
+    popup.style.backgroundColor = color;
+    setTimeout(function() {
+        popup.style.display = 'none';
+    }, 3000);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log("loaded")
-    
+    showPopup("welcome","orange")
 
 });

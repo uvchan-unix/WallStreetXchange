@@ -62,3 +62,37 @@ function searchbarLoader() {
     
     </style>`
 }   
+
+function openCloseSidebar(){
+    let sidebarController = document.querySelector(".menu-open-close-controller")
+    let sidebar = document.querySelector(".sidebar-wrapper")
+    let menuSlider = document.querySelector(".menu-slider")
+    sidebar.classList.toggle("open")
+    menuSlider.classList.toggle("open")
+    sidebarController.classList.toggle("open")
+}
+
+function moveMenuSlider(menuIndex) {
+
+    let menuicon = document.querySelectorAll(".menu-icon")
+    let menuname = document.querySelectorAll(".menu-name")
+    menuicon.forEach(function(menu,index){
+        if (menuIndex == index) {
+            menuicon[menuIndex].classList.add("active")
+           
+        } else {
+            menu.classList.remove("active")
+            
+        }
+        
+
+    })
+    
+    
+    if(menuIndex === 0){
+        document.documentElement.style.setProperty("--slider-position", "7rem");
+    }
+    else{
+        document.documentElement.style.setProperty("--slider-position", `${(menuIndex * 4.5) + 7}rem`);
+    }
+}

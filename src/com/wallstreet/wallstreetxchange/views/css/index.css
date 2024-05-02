@@ -1,25 +1,68 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root{
-    --background-color:#f8f8f8;
-    --nav-menu: #cccccc;
-    --sidebar-color:#0F090C;
-    --slider-color:#E0822D;
-    --slider-position:7rem;
-    --font-family:"Poppins", sans-serif;
+/*scroll   */
+
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
 }
 
-html{
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #161616;
+}
+
+:root {
+    --background-color: #f8f8f8;
+    --nav-menu: #cccccc;
+    --sidebar-color: #0F090C;
+    --slider-color: #E0822D;
+    --slider-position: 7rem;
+    --font-family: "Poppins", sans-serif;
+}
+
+html {
     height: 100%;
     width: 100%;
 }
 
+.info-popup {
+
+    width: 40%;
+    position: absolute;
+    top: 11%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: none;
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: var(--font-family);
+    font-weight: 500;
+    z-index: 12;
+
+}
+
 /* Sidebar navs start here ... : ) */
-.wrapper{
+.wrapper {
     height: 100vh;
     width: 100%;
     background-color: var(--background-color);
@@ -28,13 +71,13 @@ html{
     
 }
 
-.sidebar-wrapper.open{
+.sidebar-wrapper.open {
     width: 13rem;
     overflow: visible;
-    
 }
 
-.sidebar-wrapper{
+.sidebar-wrapper {
+    transition: 0.5s;
     height: 100vh;
     position: absolute;
     /* left: 0.2%; */
@@ -43,48 +86,85 @@ html{
     width: 5rem;
     background-color: var(--sidebar-color);
     overflow: hidden;
+    z-index: 1;
+    /* border: 1px solid rgb(0, 255, 145); */
 }
 
-.sidebar-logo-container{
+.menu-open-close-controller{
+    padding: 1.1rem;
+    height: 30px;
+    width: 30px;
+    /* background-color: #007bff; */
+    background-image: url(../img/Arrow.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    margin-left: 1.4rem;
+    margin-top: 0.9rem;
+    /* position: absolute; */
+    /* top: 40%; */
+    /* transform: translateY(-50%); */
+    /* left:4rem; */
+    /* z-index: 140; */
+    
+}
+.menu-open-close-controller.open{
+    background-image: url(../img/Group\ 3.png);
+}
+.sidebar-logo-container {
+    position: relative;
     height: 6rem;
-    border: 1px solid black;
+    /* border: 1px solid rgb(242, 230, 230); */
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    z-index: 120;
 }
 
+.sidebar-menu-container{
+    
+}
 
-.sidebar-menu-container ul li{
+.sidebar-menu-container ul li {
     /* border: 1px solid red; */
     margin-top: 0.5rem;
     /* background-color: #fefefe; */
 }
 
-.menu-slider{
+.menu-slider {
 
-    height:3.2rem;
+    height: 3.2rem;
     width: 3.2rem;
-    border: 1px solid wheat;
+    /* border: 1px solid wheat; */
     position: absolute;
-    background-color:var(--slider-color);
+    background-color: var(--slider-color);
     z-index: -1;
     right: 50%;
-    top:var(--slider-position);
+    top: var(--slider-position);
     transform: translateX(50%);
     border-radius: 12px;
+    transition: 0.5s ease;
 
 }
 
-.menu-slider.open{
-    width:12rem ;
+.menu-slider.open {
+    width: 12rem;
     border-radius: 8px;
-        
+
 }
 
-.menu{
+.active {
+    color: #0F090C !important;
+}
+
+.menu {
     /* border: 1px solid black; */
     display: flex;
     flex-wrap: nowrap;
     text-decoration: none;
 }
-.menu-icon{
+
+.menu-icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,10 +173,11 @@ html{
     height: 4rem;
     text-align: center;
     font-size: 1.5rem;
-    color:var(--nav-menu    );
+    color: var(--nav-menu);
+    transition: 0.5s ease;
 }
 
-.menu-name{
+.menu-name {
     /* border: 1px solid black; */
     width: 100%;
     display: flex;
@@ -104,14 +185,15 @@ html{
     align-items: center;
     font-size: 1.3rem;
     font-family: var(--font-family);
-    font-weight: 500;
+    font-weight: 600;
+    color: #fff9fc;
 }
 
 /* Sidebar nav endess ...here  */
 
 /*Top nav bar starts herr ... */
 
-.main-body{
+.main-body {
     height: 100vh;
     width: calc(100% - 5rem);
     position: absolute;
@@ -120,33 +202,34 @@ html{
     /* background-color: #7A40F2; */
 }
 
-.top-nav-wrapper{
+.top-nav-wrapper {
     /* height: 4rem; */
-    border-bottom: 1px solid rgb(197, 196, 196);
+    /* border-bottom: 1px solid rgb(197, 196, 196); */
     display: flex;
     position: relative;
 }
 
-.main-body-content{
-    border: 1px solid black;
-    height:96%;
+.main-body-content {
+    /* border: 1px solid rgb(235, 32, 32); */
+    height:calc(100% - 64px);
+    overflow: hidden;
 
 }
 
-.section-header{
+.section-header {
     font-size: 1.7rem;
     font-family: var(--font-family);
     font-weight: 500;
     /* background-color:  rgb(15, 123, 217); */
     padding: 0.6rem;
     position: absolute;
-    color:whitesmoke;
+    color: whitesmoke;
     /* background-color: #137333; */
     z-index: 10;
-        
+
 }
 
-.top-nav-serarch-bar{
+.top-nav-serarch-bar {
     /* border: 1px solid rgb(89, 21, 215); */
     height: 4rem;
     flex-grow: 1;
@@ -155,18 +238,20 @@ html{
     align-items: center;
     position: relative;
     background-color: var(--sidebar-color);
-    
+
     /* background-color: black; */
 }
-.search-box{
+
+.search-box {
     height: 2.5rem;
     width: 30rem;
     border: 1px solid black;
     padding: 0.5rem;
- 
+    border-radius: 14px;
 }
 
-.search-result-wrapper{
+
+.search-result-wrapper {
     /* border: 1px solid rgb(16, 16, 15); */
     width: 30rem;
     position: absolute;
@@ -178,24 +263,25 @@ html{
     z-index: 10;
     height: 12rem;
     height: 0;
-    transition: 0.5s;
+    transition: 0.5s ease;
+    border-radius: 8px;
 }
 
 
-.search-box:focus + .search-result-wrapper{
+.search-box:focus+.search-result-wrapper {
     height: 12rem;
 
 }
 
-.search-result-stocks{
+.search-result-stocks {
     display: flex;
-    justify-content: space-between  ;
+    justify-content: space-between;
     border-bottom: 1px solid rgb(200, 198, 198);
     padding: 0.5rem 0px;
 
 }
 
-.search-result-infoone{
+.search-result-infoone {
     /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
@@ -204,24 +290,26 @@ html{
     padding-left: 0.5rem;
 }
 
-.search-result-stocks:hover{
+.search-result-stocks:hover {
     background-color: rgb(74, 75, 75);
 }
 
-.search-result-infotwo{
+.search-result-infotwo {
     /* border: 1px solid black; */
     font-family: var(--font-family);
     padding: 0.5rem;
-    
+
 }
 
-.search-stock-result-symbol{
+.search-stock-result-symbol {
     font-size: 0.6rem;
 }
-.search-stock-result-exchange{
+
+.search-stock-result-exchange {
     padding: 0px 1rem;
 }
-.search-stock-result-price{
+
+.search-stock-result-price {
     padding: 0px 1rem;
     /* border: 1px solid green; */
     background-color: #89eca5;
@@ -229,3 +317,196 @@ html{
     border-radius: 6px;
 }
 
+.chart-footer {
+    position: absolute;
+    height: 4rem;
+    width: 45%;
+    background-color: #242524;
+    bottom: 0%;
+    right: 50%;
+    border-radius: 12px;
+    transform: translatex(50%);
+    z-index: 20;
+    display: flex;
+    border: 1px solid wheat;
+
+}
+
+.chart-footer-stockdetails {
+    width: 40%;
+    /* border: 1px solid wheat; */
+    display: flex;
+    flex-direction: column;
+    color: #f8f8f8;
+    font-family: var(--font-family);
+    padding: 0.2rem 1.3rem;
+}
+
+.chart-footer-stockdetails-name {
+    font-size: 1.4rem;
+}
+
+.chart-footer-stockdetails-symbol {
+    font-size: 0.9rem;
+}
+
+.chart-footer-stockoperation {
+    width: 50%;
+    /* border: 1px solid wheat; */
+    display: flex;
+
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.chart-footer-stockoperation-btn {
+    cursor: pointer;
+    height: 70%;
+    width: 25%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-family);
+    border-radius: 8px;
+}
+
+.chart-footer-stockoperation-buy-btn {
+    background-color: #38ed75;
+}
+
+.chart-footer-stockoperation-sell-btn {
+    background-color: rgb(236, 63, 63);
+}
+
+.chart-footer-stockoperation-info-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+}
+
+.chart-addwatchlist-btn-wrapper {
+    width: 10%;
+}
+
+.chart-addwatchlist-btn {
+    font-size: 2rem;
+    display: flex;
+    font-weight: 900;
+    color: #fffafa;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.trade-meta-popup {
+    position: absolute;
+    height: 30rem;
+    width: 28rem;
+    background-color: #e1e7e7;
+    /* bottom:10; */
+    /* right: 0; */
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------------------------------------------------- */
+
+.popup {
+    position: absolute;
+    transition: 0.5s ease-in-out;
+    top: 130%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    font-size: var(--font-family);
+    width: 0px;
+    transform-origin: bottom right;
+}
+
+.place-order-btn {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(232, 58, 58);
+    font-size: 1.5rem;
+    left: 91%;
+    top: 2%;
+    color: black;
+    font-weight: 500;
+}
+
+.popup h2 {
+    padding-bottom: 2rem;
+}
+
+.open-popup {
+    top: 50%;
+    width: 400px;
+}
+
+/* Style for inputs */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+}
+
+.input-group input,
+.input-group span {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input-group input {
+    margin-top: 5px;
+}
+
+/* Style for the button */
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Flexbox for layout */
+.input-group.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-group.flex label {
+    flex-basis: 40%;
+}
+
+.input-group.flex input,
+.input-group.flex span {
+    flex-basis: 55%;
+}
