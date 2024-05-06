@@ -61,7 +61,10 @@ function displaySearchbox(response) {
         // Create the search stock result price span
         let searchStockResultPrice = document.createElement('span');
         searchStockResultPrice.classList.add('search-stock-result-price');
-        searchStockResultPrice.textContent = "#22%";
+        searchStockResultPrice.textContent = stock.todayMovement+"%";
+        if(stock.todayMovement < 0){
+            searchStockResultPrice.style.backgroundColor = "red"
+        }
 
         // Append the exchange and price spans to the info two div
         searchResultInfoTwo.appendChild(searchStockResultExchange);
@@ -77,9 +80,11 @@ function displaySearchbox(response) {
             footerStockName.textContent = stock.stockName;
             footerStockSymbol.textContent = stock.stockSymbol + "(NSE/BSE)";
             loadOrderPopup(stock.stockSymbol, stock.currentPrice, 100000)
+            moveMenuSlider(0,true)
+            setCookie("marketstock",stock.stockSymbol)
         })
         // Append the search result stocks div to the container
-        searchResultContainer.appendChild(searchResultStocks);
+        searchResultContainer.appendChild(searchResultStocks,stock.stockSymbol,10);
 
     });
 
@@ -126,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ele.addEventListener("click",function(event){
             event.preventDefault(); 
             moveMenuSlider(index);
-            
         })
     })
 

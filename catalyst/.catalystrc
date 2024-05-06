@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "20970000000043001",
+      "name": "WallStreetXchange",
+      "domain": {
+        "id": "10078825435",
+        "name": "wallstreetxchange-838172193.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "838172193",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}

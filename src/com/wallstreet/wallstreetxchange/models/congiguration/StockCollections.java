@@ -9,35 +9,49 @@ import org.json.JSONObject;
 import com.wallstreet.wallstreetxchange.models.DAO.Stock;
 import com.wallstreet.wallstreetxchange.models.stocks.*;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class StockCollections {
-    
+
     private TrieNode rootNode;
-    
+    private ExecutorService executor;
+
     // PriceExtractor obj = new PriceExtractor();
     // GetStockPrices obj = new GetStockPrices();
-    
+
     public StockCollections() {
         rootNode = new TrieNode();
+        executor = Executors.newFixedThreadPool(20);
     }
 
     public void insert(String stockNameOG, String stockSymbol, String stockExchange) {
 
-        TrieNode temp = rootNode;
-        String stockName = stockNameOG;
-        stockName = stockName.replaceAll("[\\s&.()'-/]", "");
+        executor.submit(() -> {
+            try {
+                TrieNode temp = rootNode;
+                String stockName = stockNameOG.replaceAll("[\\s&.()'-/]", "");
 
-        for (int i = 0; i < stockName.length(); i++) {
-            char c = stockName.charAt(i);
-            int index = Character.toLowerCase(c) - 'a';
-            if (temp.children[index] == null) {
-                temp.children[index] = new TrieNode();
+                for (int i = 0; i < stockName.length(); i++) {
+                    char c = stockName.charAt(i);
+                    int index = Character.toLowerCase(c) - 'a';
+                    if (temp.children[index] == null) {
+                        temp.children[index] = new TrieNode();
+                    }
+                    temp = temp.children[index];
+                }
+
+                String logoId = GetStockLogo.getLogoId(stockSymbol);
+                temp.isEndOfWord = true;
+                temp.stock = new Stock(stockNameOG, stockSymbol, stockExchange);
+                temp.stock.setLogoId(logoId);
+                System.out.println(logoId);
+            } catch (Exception e) {
+                System.out.println(e);
+                e.printStackTrace();
             }
-            temp = temp.children[index];
+        });
 
-        }
-
-        temp.isEndOfWord = true;
-        temp.stock = new Stock(stockNameOG,stockSymbol,stockExchange);
     }
 
     private TrieNode findNode(String prefix) {
@@ -61,47 +75,51 @@ public class StockCollections {
 
     }
 
-    private JSONArray collectAllWords(TrieNode node, JSONArray array, String prefix,boolean price) {
+    private JSONArray collectAllWords(TrieNode node, JSONArray array, String prefix, boolean price) {
 
         if (node == null)
             return null;
 
         if (node.isEndOfWord) {
             JSONObject json = new JSONObject();
+            JSONObject njson = null;
             json.put("stockName", node.stock.getStockName());
             json.put("stockSymbol", node.stock.getStockSymbol());
             json.put("stockExchange", node.stock.getStockExchange());
-            
+            json.put("logoID", node.stock.getLogoId());
+
             if (price) {
                 GetStockPrice obj = new GetStockPrice();
-                json.put("curretPrice", obj.getStockPrice(node.stock.getStockSymbol(),"NSE"));
-            }
-            else{
+                json.put("curretPrice", obj.getStockPrice(node.stock.getStockSymbol(), "NSE"));
+            } else {
                 GetStockPriceInfo obj = new GetStockPriceInfo();
-                json.put("currentPrice", obj.getStockPrice(node.stock.getStockSymbol()));
+                njson = obj.getStockPrice(node.stock.getStockSymbol());
+                json.put("currentPrice", njson.getDouble("currentPrice"));
+                json.put("previousClose", njson.getDouble("previousClose"));
+                json.put("todayMovement", njson.getDouble("todayMovement"));
             }
             array.put(json);
         }
 
         for (int i = 0; i < 26; i++) {
             char c = (char) ('a' + i);
-            collectAllWords(node.children[i], array, prefix + c,price);
+            collectAllWords(node.children[i], array, prefix + c, price);
         }
 
         return array;
 
     }
 
-    public JSONArray getStocks(String prefix , boolean price) {
+    public JSONArray getStocks(String prefix, boolean price) {
 
-        JSONArray array = collectAllWords(findNode(prefix), new JSONArray(), prefix,price);
-        if (array!=null) {    
+        JSONArray array = collectAllWords(findNode(prefix), new JSONArray(), prefix, price);
+        if (array != null) {
             return array;
         }
         return null;
     }
-    
-    public void dataInsertion(){
+
+    public void dataInsertion() {
 
         insert("Tata Motors", "RPOWER", "BSE/NSE");
         insert("ITC Limited", "ITC", "BSE/NSE");
@@ -424,7 +442,7 @@ public class StockCollections {
         insert("fooood", "XNBUSD", "Metals");
 
     }
-    
+
 }
 
 class TrieNode {

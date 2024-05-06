@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.gson.JsonArray;
 import com.wallstreet.wallstreetxchange.models.util.StatusCode;
 import com.wallstreet.wallstreetxchange.models.util.StockCalcOperations;
 import com.wallstreet.wallstreetxchange.properties.SQLqueries;
@@ -113,20 +114,25 @@ public class DBOModule {
 
             while (result.next()) {
                 JSONObject json = new JSONObject();
+                
                 json.put("stockName", result.getString("stockName"));
                 json.put("stockSymbol", result.getString("stockSymbol"));
                 json.put("stockExchange", result.getString("stockExchange"));
-                json.put("quantity", result.getString("quantity"));
+                json.put("quantity", result.getInt("quantity"));
                 json.put("transactionType", result.getBoolean("transactionType"));
-                json.put("transactionPrice", result.getString("transactionPrice"));
+                json.put("transactionPrice", result.getDouble("transactionPrice"));
                 json.put("transactionDate", result.getTimestamp("transactionDate"));
 
+                double totalInvestment = result.getInt("quantity") * result.getDouble("transactionPrice");
+                json.put("totalInvestment", totalInvestment);
+                
                 jsonarray.put(json);
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e);
         }
 
         return jsonarray;
@@ -254,6 +260,7 @@ public class DBOModule {
         user.setUsername("uvchan");
         DBConnection con = new DBConnection();
         DBOModule db = new DBOModule(con.getConnection());
-        System.out.println(db.getUserWalletMETA(user));
+        // System.out.println(db.getUserWalletMETA(user));
+        System.out.println(db.getUserStocks(user));
     }
 }

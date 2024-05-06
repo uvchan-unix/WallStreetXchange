@@ -36,7 +36,6 @@
         "/home/magesh/Downloads/jsoup-1.17.2.jar",
         "WEB-INF/lib/servlet-api.jar",
         "WEB-INF/lib/okio-jvm-3.9.0.jar",
-        "WEB-INF/lib/okhttp-5.0.0-alpha.14.jar",
         "WEB-INF/lib/mysql-connector-j-8.2.0.jar",
         "WEB-INF/lib/kotlin-stdlib-1.9.23.jar",
         "WEB-INF/lib/jsoup-1.17.2.jar",
@@ -45,6 +44,19 @@
         "WEB-INF/lib/javaparser-core-3.25.7.jar",
         "WEB-INF/lib/gson-2.8.2.jar",
         "WEB-INF/lib/annotations-13.0.jar",
-        "WEB-INF/lib/activation-1.1.1.jar"
+        "WEB-INF/lib/activation-1.1.1.jar",
+        "catalyst/functions/server/lib/servlet-api-3.1.jar",
+        "catalyst/functions/server/lib/org.json.jar",
+        "catalyst/functions/server/lib/okio-1.13.0.jar",
+        "catalyst/functions/server/lib/okhttp-3.9.0.jar",
+        "catalyst/functions/server/lib/json-simple-1.1.1.jar",
+        "catalyst/functions/server/lib/json.jar",
+        "catalyst/functions/server/lib/jackson-databind-2.7.9.2.jar",
+        "catalyst/functions/server/lib/jackson-core-2.7.9.jar",
+        "catalyst/functions/server/lib/jackson-annotations-2.7.9.jar",
+        "catalyst/functions/server/lib/gradle-wrapper.jar",
+        "catalyst/functions/server/lib/commons-logging-1.0.4.jar",
+        "catalyst/functions/server/lib/catalyst-java-sdk-1.15.1.jar",
+        "catalyst/functions/server/lib/catalyst-function-sdk-1.0.0.jar"
     ]
 }

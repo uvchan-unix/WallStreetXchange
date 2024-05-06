@@ -2,6 +2,7 @@
     "recommendations": [
         "jakebathman.mysql-syntax",
         "ritwickdey.liveserver",
-        "ms-vscode.live-server"
+        "ms-vscode.live-server",
+        "ms-vsliveshare.vsliveshare"
     ]
 }

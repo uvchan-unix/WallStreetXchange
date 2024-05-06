@@ -1,4 +1,4 @@
-package com.wallstreet.wallstreetxchange.controllers.auth;
+package com.wallstreet.wallstreetxchange.controllers.webhooks;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import com.wallstreet.wallstreetxchange.models.DAO.*;
 import com.wallstreet.wallstreetxchange.models.util.StatusCode;
 import com.wallstreet.wallstreetxchange.properties.FunctionDefanitions;
 
-@WebServlet("/auth/login")
+@WebServlet("/webhook/login")
 
 public class Login extends HttpServlet {
 
@@ -22,6 +22,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         JSONObject json = FunctionDefanitions.inputReader(req);
+        System.out.println(json.toString());
         String username = json.getString("apparaw");
         String password = json.getString("suparaw");
 
@@ -32,8 +33,8 @@ public class Login extends HttpServlet {
             HttpSession session = req.getSession();
             User verifiedUser = db.getUserObj(username, password);
             session.setAttribute("User", verifiedUser);
-            System.out.println(verifiedUser.getUsername());
-            FunctionDefanitions.outputWriter("Success"+verifiedUser.getUserID()+"k", resp);
+            
+            FunctionDefanitions.outputWriter("true", resp);
 
         }else if(code.toString() == "111") {
             FunctionDefanitions.outputWriter("tappuuu" + code.toString() , resp);
@@ -42,3 +43,4 @@ public class Login extends HttpServlet {
     }
 
 }
+
